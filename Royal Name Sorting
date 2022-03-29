@@ -1,0 +1,18 @@
+def convertname(mylist):
+    convert = {'I': 1, 'V': 5, 'X': 10, 'L': 50}
+    myarr = []
+    mylist = sorted(mylist)
+    for i in mylist:
+        text_split = i.split(' ')
+        name = text_split[0]
+        test  = text_split[1]
+        result = convert[test[-1]]
+
+        for t in range(len(test)-2,-1,-1):
+            if convert[test[t]] <convert[test[t+1]]:
+                result -= convert[test[t]]*2
+            result += convert[test[t]]
+        myarr.append((name,i, result))
+    myarr = sorted(myarr,key=lambda x:(x[0],x[2]))
+
+    return [x[1] for x in myarr]
