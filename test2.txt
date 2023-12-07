@@ -5,29 +5,27 @@ Created on Sun Jun 21 2020
 @author: Stanislav "Stas" Lukashevich
 """
 
-
 ########################################################
-# ____________STEP_1:_OPEN_YOUR_LINKEDIN________________#
+#____________STEP_1:_OPEN_YOUR_LINKEDIN________________#
 ########################################################
 
 def product_define(myText):
-    if myText.find('Personalisiere dein Song Cover Glas') != -1:
+    if myText.find('Personalisiere dein Song Cover Glas')!= -1:
         return '2'
-    elif myText.find('Feuerzeug') != -1:
+    elif myText.find('Feuerzeug')!= -1:
         return '3'
     return '1'
 
-
-def run(excel, folder_path):
+def run(excel,folder_path):
     df = pd.read_excel(excel)
-
-    # Directory
+    
+    # Directory 
     directory = "Images"
     directory2 = "qrCode"
-    # Parent Directory path
-    parent_dir = folder_path + '/'
-
-    # Path
+    # Parent Directory path 
+    parent_dir = folder_path +'/'
+    
+    # Path 
     path = os.path.join(parent_dir, directory)
     qrc_path = os.path.join(parent_dir, directory2)
     if not os.path.isdir(path):
@@ -37,22 +35,23 @@ def run(excel, folder_path):
         os.mkdir(qrc_path)
         print("Directory '% s' created" % directory2)
 
-        # all necessary inputs
+
+            # all necessary inputs
     username_string = 'bl4ckprint1@outlook.de'
     password_string = 'Meva200521'
+
 
     service = Service()
     options = webdriver.ChromeOptions()
 
     browser = webdriver.Chrome(service=service, options=options)
 
-    browser.get(
-        'https://sellercentral-europe.amazon.com/ap/signin?openid.pape.max_auth_age=900&openid.return_to=https%3A%2F%2Fsellercentral-europe.amazon.com%2Fgestalt%2Ffulfillment%2Findex.html%3ForderId%3D302-8868788-1157918%26orderItemId%3D32926579119402%26marketplaceId%3DA1PA6795UKMFR9&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=sc_eu_amazon_v2&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&mons_redirect=sign_in&ssoResponse=eyJ6aXAiOiJERUYiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiQTI1NktXIn0.jKzSUKy7gE0Ehp17077yaccIC4_p4nH9QZpzNa0CKi4-5NK1OrGe0A.1PN-bin9LqLuBWu-.PZec6KNwIbdTVm2v23eM5ZCWU_82iHL4uLIk2A0WHcAlfjk1waQeuhsKrSDGFcJWfPVSJtIyHOfztrjxmAf9p6VjWTRsU_VPH01aCitwxDVpaQQB4_DdbnjOCPmhkHlLn8GY_8qs98rTd3GkHUpc-sjyO2XUny3oFnEszf5Y8oYOE2XeGkF4YBNUprD8KE5KnHOTZxeWpg.rND0NrDH5MBGq1ZsePwTOg')
+
+    browser.get('https://sellercentral-europe.amazon.com/ap/signin?openid.pape.max_auth_age=900&openid.return_to=https%3A%2F%2Fsellercentral-europe.amazon.com%2Fgestalt%2Ffulfillment%2Findex.html%3ForderId%3D302-8868788-1157918%26orderItemId%3D32926579119402%26marketplaceId%3DA1PA6795UKMFR9&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=sc_eu_amazon_v2&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&mons_redirect=sign_in&ssoResponse=eyJ6aXAiOiJERUYiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiQTI1NktXIn0.jKzSUKy7gE0Ehp17077yaccIC4_p4nH9QZpzNa0CKi4-5NK1OrGe0A.1PN-bin9LqLuBWu-.PZec6KNwIbdTVm2v23eM5ZCWU_82iHL4uLIk2A0WHcAlfjk1waQeuhsKrSDGFcJWfPVSJtIyHOfztrjxmAf9p6VjWTRsU_VPH01aCitwxDVpaQQB4_DdbnjOCPmhkHlLn8GY_8qs98rTd3GkHUpc-sjyO2XUny3oFnEszf5Y8oYOE2XeGkF4YBNUprD8KE5KnHOTZxeWpg.rND0NrDH5MBGq1ZsePwTOg')
 
     # # time.sleep(50)
 
-    aaa = WebDriverWait(browser, 300).until(
-        EC.visibility_of_element_located((By.CSS_SELECTOR, '[class="page-container-customization-view"]')))
+    aaa = WebDriverWait(browser, 300).until(EC.visibility_of_element_located((By.CSS_SELECTOR, '[class="page-container-customization-view"]')))
 
     data = []
     image = []
@@ -64,37 +63,36 @@ def run(excel, folder_path):
 
         test = browser.find_element(By.CSS_SELECTOR, '[class="fulfillment-view"]')
         data.append(test.text)
-        download = browser.find_element(By.CSS_SELECTOR, '[class="download-link"]')
+        download = browser.find_element(By.CSS_SELECTOR,'[class="download-link"]')
         download.click()
         time.sleep(1)
         browser.switch_to.window(browser.window_handles[1])
         time.sleep(1)
 
         with open(f'{path}/images_{index}.jpg', 'wb') as file:
-            file.write(browser.find_element(By.TAG_NAME, 'img').screenshot_as_png)
+            file.write(browser.find_element(By.TAG_NAME,'img').screenshot_as_png)
             print(f'Image was downloaded to {path}/images_{index}.jpg')
             image.append(f'{path}/images_{index}.jpg')
         browser.close()
         browser.switch_to.window(browser.window_handles[0])
-        index += 1
+        index +=1
 
     df['data'] = data
     df['url'] = image
 
-    df['Trage dein Wunschtext für die 1. Zeile ein'] = df['data'].str.extract(
-        r'Weiß\n.+\nTrage dein Wunschtext für die 1. Zeile ein\n(.+)')
-    df['Trage dein Wunschtext für die 2. Zeile ein'] = df['data'].str.extract(
-        r'Farbe\n.+\nTrage dein Wunschtext für die 2. Zeile ein\n(.+)')
-    df = df.replace('', '[empty]')
+
+
+    df['Trage dein Wunschtext für die 1. Zeile ein'] = df['data'].str.extract(r'Weiß\n.+\nTrage dein Wunschtext für die 1. Zeile ein\n(.+)')
+    df['Trage dein Wunschtext für die 2. Zeile ein'] = df['data'].str.extract(r'Farbe\n.+\nTrage dein Wunschtext für die 2. Zeile ein\n(.+)')
+    df = df.replace('','[empty]')
 
     df['Wähle deine Geschenkbox aus'] = df['data'].str.extract(r'Wähle deine Geschenkbox aus\nDropdown.+\n(.+)')
     df['Box_text'] = df['data'].str.extract(r'Wunschtext für die Geschenkbox eingeben\n.+\n(.+)')
     df['Box'] = df['Wähle deine Geschenkbox aus'].str.extract(r'(Silber|Gold)')
     df['Song Cover Glas?'] = df['data'].str.extract(r'Song Cover Glas\?\n.+\n(.+)')
 
-    df['Wähle deine Geschenkbox aus'] = df['Wähle deine Geschenkbox aus'].map(
-        lambda x: 'No' if x == 'Ohne Geschenkbox' else 'Yes')
-    if df['data'][0].find('MENGE') != -1:
+    df['Wähle deine Geschenkbox aus'] = df['Wähle deine Geschenkbox aus'].map(lambda x: 'No' if x == 'Ohne Geschenkbox' else 'Yes')
+    if df['data'][0].find('MENGE')!=-1:
         df['Quantity'] = df['data'].str.extract(r'MENGE:\n(.+)')
     else:
         df['Quantity'] = df['data'].str.extract(r'QTY:\n(.+)')
@@ -109,52 +107,44 @@ def run(excel, folder_path):
     df['QR_link'] = df['QR_link'].fillna('')
     df['Base_wood'] = df['data'].str.extract(r'Aufsteller\nDrop-down-Men.+\n(.+)')
     df['Base_wood_info'] = df['data'].str.extract(r'Trage dein Wunschtext für den Holzaufsteller ein\n.+\n(.+)')
-    df = df.replace('', '[empty]')
-    print('Finished tidy data')
+    df = df.replace('','[empty]')
+    
 
-    # QR code
+    #QR code
     nameQR = 1
     qr_list = []
     for qr in df['QR_link']:
         imgQR = qrcode.make(qr)
         qr_list.append(f"{qrc_path}/QR_code{str(nameQR)}.jpg")
         imgQR.save(f"{qrc_path}/QR_code{str(nameQR)}.jpg")
-        nameQR += 1
+        nameQR+=1
     df['QR_link_img'] = qr_list
-    df.columns = ['url', 'data', 'img', 'text1', 'text2', 'Box engraving', 'Box_text', 'Box_type', 'Song Cover',
-                  'Quantity', 'Product', 'QRcode', 'Product_2_info1', 'Product_2_info2', 'keychain_quantity', 'QR_link',
-                  'Base_wood', 'Base_wood_info', 'QR_link_img']
-    df['product_3_text'] = df['data'].str.extract(r'Wunschtext\n([\S\s]+)\n\nFeuerzeug mit')
-    df['product_3_text'] = df['product_3_text'].str.replace('\n', '[linebreak]')
-
+    df.columns = ['url', 'data', 'img', 'text1', 'text2', 'Box engraving', 'Box_text', 'Box_type', 'Song Cover','Quantity','Product','QRcode','Product_2_info1','Product_2_info2','keychain_quantity','QR_link','Base_wood','Base_wood_info','QR_link_img' ]
+    df['product_3_text'] = df['data'].str.extract(r'Wunschtext\n(.+)')
     df['product_3_box'] = df['data'].str.extract(r'Geschenkbox \+ Namensgravur (.+)')
     df['product_3_box_text'] = df['data'].str.extract(r'Name für die Box eintragen\n(.+)')
+    df = df.replace('','[empty]')
+    print('Finished tidy data')
 
-    df[['text1', 'text2', 'img', 'Box engraving', 'Song Cover', 'Quantity', 'Product', 'QRcode', 'Product_2_info1',
-        'Product_2_info2', 'keychain_quantity', 'QR_link', 'QR_link_img', 'Base_wood', 'Base_wood_info',
-        'product_3_text']].to_csv('Data_2.csv', sep='\t', encoding='utf-8-sig', index=False)
-    df.to_excel('Final_data.xlsx', index=False)
+    df[['text1','text2','img','Box engraving','Song Cover','Quantity','Product','QRcode','Product_2_info1','Product_2_info2','keychain_quantity','QR_link','QR_link_img','Base_wood','Base_wood_info','product_3_text']].to_csv('Data_2.csv',sep='\t',encoding='utf-8-sig',index = False)
+    df.to_excel('Final_data.xlsx',index = False)
     new_excel1 = pd.DataFrame(columns=['Silver'])
     new_excel2 = pd.DataFrame(columns=['Gold'])
-    new_excel1['Silver'] = df[df['Box_type'] == 'Silber']['Box_text'].to_list() + df[df['product_3_box'] == 'Silber'][
-        'product_3_box_text'].to_list()
-    new_excel2['Gold'] = df[df['Box_type'] == 'Gold']['Box_text'].to_list() + df[df['product_3_box'] == 'Gold'][
-        'product_3_box_text'].to_list()
-    new_excel1 = new_excel1.replace(['[empty]'], '')
-    new_excel2 = new_excel2.replace(['[empty]'], '')
-    new_excel = pd.concat([new_excel1['Silver'], new_excel2['Gold']], axis=1)
-    new_excel.to_excel('Box.xlsx', index=False)
-    new_excel1.to_csv('Silver.csv', index=False, encoding='utf-8-sig')
-    new_excel2.to_csv('Gold.csv', index=False, encoding='utf-8-sig')
+    new_excel1['Silver'] = df[df['Box_type']=='Silber']['Box_text'].to_list() + df[df['product_3_box']=='Silber']['product_3_box_text'].to_list()
+    new_excel2['Gold'] = df[df['Box_type']=='Gold']['Box_text'].to_list() + df[df['product_3_box']=='Gold']['product_3_box_text'].to_list()
+    new_excel1 = new_excel1.replace(['[empty]'],'')
+    new_excel2 = new_excel2.replace(['[empty]'],'')
+    new_excel = pd.concat([new_excel1['Silver'],new_excel2['Gold']],axis=1)
+    new_excel.to_excel('Box.xlsx',index = False)
+    new_excel1.to_csv('Silver.csv',index=False,encoding='utf-8-sig')
+    new_excel2.to_csv('Gold.csv',index=False,encoding='utf-8-sig')
 
     print('Crawling done')
-
-
 def main():
     # Define the layout of the GUI
     layout = [
         [sg.Text("Choose your Excel")],
-        [sg.InputText(key="url_input", enable_events=True), sg.FileBrowse()],
+        [sg.InputText(key="url_input", enable_events=True),sg.FileBrowse()],
         [sg.Text("Output folder for image")],
         [sg.InputText(key="folder_path", enable_events=True), sg.FolderBrowse()],
         [sg.Button("Run", key="run_button"), sg.Text("", key="done_text", size=(10, 1))],
@@ -178,13 +168,15 @@ def main():
                 # Update the "Done" text element
                 window["done_text"].update("Running...")
 
-                run(link_url, folder_path)
+                run(link_url,folder_path)
                 window["done_text"].update("Done")
     # Close the window
     window.close()
 
 
+
 if __name__ == '__main__':
+
     # Pyinstaller fix
     multiprocessing.freeze_support()
 
