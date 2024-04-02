@@ -13,11 +13,11 @@ def predefined_function(path):
         for name in files:
             extension = re.search('(?<=\.)[a-zA-Z]+$',name)
             if extension!=None and extension[0] in ['png','jpeg','jpg','webp']:
-                fName1 = os.path.basename(name+'_1200x1200')
-                output1 = os.path.join(outputFolder, fName1)
+                fName1 = os.path.basename(name)
+                output1 = os.path.join(outputFolder, fName1+'_1200x1200')
 
-                fName2 = os.path.basename(name+'_1200x628')
-                output2 = os.path.join(outputFolder, fName2)
+                fName2 = os.path.basename(name)
+                output2 = os.path.join(outputFolder, fName2+'_1200x628')
 
                 im = Image.open(name)
                 width, height = im.size   # Get dimensions
