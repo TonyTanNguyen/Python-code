@@ -1,6 +1,6 @@
 def predefined_function(path):
 
-    list_subfolders_with_paths = [f.path for f in os.scandir(path) if f.is_dir()]
+   list_subfolders_with_paths = [f.path for f in os.scandir(path) if f.is_dir()]
 
     for subpath in list_subfolders_with_paths:
         
@@ -28,9 +28,10 @@ def predefined_function(path):
               
                 if width >= height:
 
-                    new_height = int(new_height * height / width)
+                    new_width = int(new_height * width / height)
+                    
                 else:
-                    new_width = int(new_width * width / height)
+                    new_height = int(new_width * height / width)
                 # Resize image
                 im=im.resize((new_width, new_height), resample=Image.BILINEAR)
 
