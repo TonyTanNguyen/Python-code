@@ -2,54 +2,54 @@ def predefined_function(path):
     list_subfolders_with_paths = [f.path for f in os.scandir(path) if f.is_dir()]
 
     for subpath in list_subfolders_with_paths:
-        files = glob.glob(f"{subpath}/*")
-        resize_folder = 'Resize/Google PMAX'
-        outputFolder = os.path.join(subpath, resize_folder)
-        isExist = os.path.exists(outputFolder)
-        if not isExist:
-            os.makedirs(outputFolder)
-        for name in files:
-            extension = re.search('(?<=\.)[a-zA-Z]+$',name)
-            if extension!=None and extension[0] in ['png','jpeg','jpg','webp']:
-                fName1 = os.path.basename(name.replace(extension[0],'_1200x1200.'+extension[0]))
-                output1 = os.path.join(outputFolder, fName1)
-
-                fName2 = os.path.basename(name.replace(extension[0],'_1200x628.'+extension[0]))
-                output2 = os.path.join(outputFolder, fName2)
-
-                im = Image.open(name)
-                width, height = im.size   # Get dimensions
-                new_width = 1200
-                new_height = 1200
-                # new_height = 628
-                
-              
-                if width >= height:
-
-                    new_width = int(new_height * width / height)
-                    
-                else:
-                    new_height = int(new_width * height / width)
-                # Resize image
-                im=im.resize((new_width, new_height), resample=Image.BILINEAR)
-
-                # # Crop the center of the image
-                width, height = im.size
-                left = (width - 1200)/2
-                top = (height - 1200)/2
-                right = (width + 1200)/2
-                bottom = (height + 1200)/2
-
-                im1 = im.crop((left, top, right, bottom))
-                im1.save(output1,quality = 100)
-
-                left = (width - 1200)/2
-                top = (height - 628)/2
-                right = (width + 1200)/2
-                bottom = (height + 628)/2
-
-                im2 = im.crop((left, top, right, bottom))
-                im2.save(output2,quality = 100)
+		files = glob.glob(f"{subpath}/*")
+		resize_folder = 'Resize/Google PMAX'
+		outputFolder = os.path.join(subpath, resize_folder)
+		isExist = os.path.exists(outputFolder)
+		if not isExist:
+			os.makedirs(outputFolder)
+		for name in files:
+			extension = re.search('(?<=\.)[a-zA-Z]+$',name)
+			if extension!=None and extension[0] in ['png','jpeg','jpg','webp']:
+				fName1 = os.path.basename(name.replace(extension[0],'_1200x1200.'+extension[0]))
+				output1 = os.path.join(outputFolder, fName1)
+	
+				fName2 = os.path.basename(name.replace(extension[0],'_1200x628.'+extension[0]))
+				output2 = os.path.join(outputFolder, fName2)
+	
+				im = Image.open(name)
+				width, height = im.size   # Get dimensions
+				new_width = 1200
+				new_height = 1200
+				# new_height = 628
+				
+			  
+				if width >= height:
+	
+					new_width = int(new_height * width / height)
+					
+				else:
+					new_height = int(new_width * height / width)
+				# Resize image
+				im=im.resize((new_width, new_height), resample=Image.BILINEAR)
+	
+				# # Crop the center of the image
+				width, height = im.size
+				left = (width - 1200)/2
+				top = (height - 1200)/2
+				right = (width + 1200)/2
+				bottom = (height + 1200)/2
+	
+				im1 = im.crop((left, top, right, bottom))
+				im1.save(output1,quality = 100)
+	
+				left = (width - 1200)/2
+				top = (height - 628)/2
+				right = (width + 1200)/2
+				bottom = (height + 628)/2
+	
+				im2 = im.crop((left, top, right, bottom))
+				im2.save(output2,quality = 100)
 
 
 
