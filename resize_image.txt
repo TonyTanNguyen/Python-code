@@ -13,10 +13,10 @@ def predefined_function(path):
         for name in files:
             extension = re.search('(?<=\.)[a-zA-Z]+$',name)
             if extension!=None and extension[0] in ['png','jpeg','jpg','webp']:
-                fName1 = os.path.basename(name.replace(extension[0],'_1200x1200'+extension[0]))
+                fName1 = os.path.basename(name.replace(extension[0],'_1200x1200.'+extension[0]))
                 output1 = os.path.join(outputFolder, fName1)
 
-                fName2 = os.path.basename(name.replace(extension[0],'_1200x628'+extension[0]))
+                fName2 = os.path.basename(name.replace(extension[0],'_1200x628.'+extension[0]))
                 output2 = os.path.join(outputFolder, fName2)
 
                 im = Image.open(name)
