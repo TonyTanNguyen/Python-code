@@ -3,7 +3,6 @@ def predefined_function(path):
     list_subfolders_with_paths = [f.path for f in os.scandir(path) if f.is_dir()]
 
     for subpath in list_subfolders_with_paths:
-        
         files = glob.glob(f"{subpath}/*")
         resize_folder = 'Resize/Google PMAX'
         outputFolder = os.path.join(subpath, resize_folder)
