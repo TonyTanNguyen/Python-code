@@ -13,8 +13,12 @@ def predefined_function(path):
         for name in files:
             extension = re.search('(?<=\.)[a-zA-Z]+$',name)
             if extension!=None and extension[0] in ['png','jpeg','jpg','webp']:
-                fName = os.path.basename(name)
-                output = os.path.join(outputFolder, fName)
+                fName1 = os.path.basename(name)
+                output1 = os.path.join(outputFolder, fName+'_1200x1200')
+
+                fName2 = os.path.basename(name)
+                output2 = os.path.join(outputFolder, fName+'_1200x628')
+
                 im = Image.open(name)
                 width, height = im.size   # Get dimensions
                 new_width = 1200
@@ -38,7 +42,7 @@ def predefined_function(path):
                 bottom = (height + 1200)/2
 
                 im1 = im.crop((left, top, right, bottom))
-                im1.save(output,quality = 100)
+                im1.save(output1,quality = 100)
 
                 left = (width - 1200)/2
                 top = (height - 628)/2
@@ -46,7 +50,7 @@ def predefined_function(path):
                 bottom = (height + 628)/2
 
                 im2 = im.crop((left, top, right, bottom))
-                im2.save(output,quality = 100)
+                im2.save(output2,quality = 100)
 
 
 
